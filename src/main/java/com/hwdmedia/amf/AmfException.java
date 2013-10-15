@@ -1,5 +1,5 @@
 /**
- * Copyright © 2013 Gennadiy Kozlenko
+ * Copyright © 2013 HWD Media
  * 
  * This file is part of hwdmedia-amf - AMF reader/writer library.
  */
