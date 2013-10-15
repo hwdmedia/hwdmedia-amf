@@ -8,6 +8,7 @@ package com.hwdmedia.amf;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -102,7 +103,7 @@ public final class Amf0Reader {
                 return readLongString();
                 
             case AmfTypes.AMF0_XML_DOCUMENT:
-                return readLongString();
+                return readXmlDocument();
                 
             case AmfTypes.AMF0_TYPED_OBJECT:
                 throw new AmfException("Typed objects aren't supported yet");
@@ -120,7 +121,7 @@ public final class Amf0Reader {
         int size = data.getShort();
         byte[] chars = new byte[size];
         data.get(chars);
-        return new String(chars);
+        return new String(chars, StandardCharsets.UTF_8);
     }
     
     /**
@@ -131,7 +132,7 @@ public final class Amf0Reader {
         int size = data.getInt();
         byte[] chars = new byte[size];
         data.get(chars);
-        return new String(chars);
+        return new String(chars, StandardCharsets.UTF_8);
     }
     
     /**
@@ -139,7 +140,7 @@ public final class Amf0Reader {
      * @return 
      * @throws AmfException
      */
-    private Map<String, Object> readObject() throws AmfException {
+    private Map readObject() throws AmfException {
         Map<String, Object> object = new HashMap<>();
         while (true) {
             String key = readString();

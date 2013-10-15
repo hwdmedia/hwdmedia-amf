@@ -301,7 +301,7 @@ public final class Amf0Writer implements Closeable {
      */
     private void writeObject(Object value) throws IOException, AmfException {
         out.write(AmfTypes.AMF0_OBJECT);
-        Class clazz =  value.getClass();
+        Class clazz = value.getClass();
         for (Field field: clazz.getFields()) {
             out.writeUTF(field.getName());
             try {
