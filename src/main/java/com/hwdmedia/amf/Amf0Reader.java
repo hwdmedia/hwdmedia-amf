@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
@@ -141,7 +141,7 @@ public final class Amf0Reader {
      * @throws AmfException
      */
     private Map readObject() throws AmfException {
-        Map<String, Object> object = new HashMap<>();
+        Map<String, Object> object = new LinkedHashMap<>();
         while (true) {
             String key = readString();
             byte dataType = data.get();
@@ -161,7 +161,7 @@ public final class Amf0Reader {
      */
     public Map readEcmaArray() throws AmfException {
         long size = data.getInt();
-        Map<String, Object> array = new HashMap<>();
+        Map<String, Object> array = new LinkedHashMap<>();
         for (int i = 0; i < size; i++) {
             String key = readString();
             array.put(key, read());
